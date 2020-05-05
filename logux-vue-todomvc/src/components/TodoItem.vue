@@ -38,13 +38,13 @@ export default {
   },
   methods: {
     editTodo ({ todo, value }) {
-      this.$store.commit.crossTab({ type: 'editTodo', todo, text: value })
+      this.$store.commit.sync({ type: 'editText', id: todo.id, text: value })
     },
     toggleTodo (todo) {
-      this.$store.commit.crossTab({ type: 'editTodo', todo, done: !todo.done })
+      this.$store.commit.sync({ type: 'toggle', id: todo.id, done: !todo.done })
     },
     removeTodo (todo) {
-      this.$store.commit.crossTab({ type: 'removeTodo', todo })
+      this.$store.commit.sync({ type: 'removeTodo', id: todo.id })
     },
     doneEdit (e) {
       const value = e.target.value.trim()

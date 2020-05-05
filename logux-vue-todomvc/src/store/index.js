@@ -12,6 +12,10 @@ const Logux = createLogux({
   token: '' // no auth
 })
 
+function findTodoIndex(todos, id) {
+  return todos.findIndex(t => t.id == id)
+}
+
 const store = new Logux.Store({
   state: {
     todos: []
@@ -21,19 +25,32 @@ const store = new Logux.Store({
       state.todos.push(todo)
     },
   
-    removeTodo (state, todo) {
-      state.todos.splice(state.todos.indexOf(todo), 1)
+    removeTodo (state, { id }) {
+      const index = findTodoIndex(state.todos, id)
+      if (index != -1) {
+        state.todos.splice(index, 1)
+      }
     },
   
-    editTodo (state, { todo, text = todo.text, done = todo.done }) {
-      const index = state.todos.indexOf(todo)
+    editText (state, { id, text }) {
+      const index = findTodoIndex(state.todos, id)
+      const todo = state.todos[index]
   
       state.todos.splice(index, 1, {
         ...todo,
         text,
-        done
       })
-    }
+    },
+  
+    toggle (state, { id, done }) {
+      const index = findTodoIndex(state.todos, id)
+      const todo = state.todos[index]
+  
+      state.todos.splice(index, 1, {
+        ...todo,
+        done,
+      })
+    },
   },
   actions: {  
   },
@@ -44,5 +61,7 @@ const store = new Logux.Store({
 log(store.client)
 
 store.client.start()
+
+store.client.log.add({ type: 'logux/subscribe', channel: 'todos' }, { sync: true })
 
 export default store

@@ -1,16 +1,8 @@
 # logux-vue-todomvc
 
-## Project setup
-```
-npm install
-```
+Example of synchronized single-user app.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
+To start localy:
 ```
 npm run build
 ```

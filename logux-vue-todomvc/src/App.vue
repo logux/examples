@@ -57,13 +57,13 @@ export default {
 	toggleAll () {
 		this.todos
 			.forEach(todo => {
-				this.$store.commit.crossTab({ type: 'editTodo', todo, done: !todo.done })
+				this.$store.commit.sync({ type: 'toggle', id: todo.id, done: !todo.done })
 			})
 	},
     addTodo (e) {
 	  const text = e.target.value
       if (text.trim()) {
-        this.$store.commit.crossTab({ type: 'addTodo', text, done: false})
+        this.$store.commit.sync({ type: 'newTodo', text, done: false})
       }
       e.target.value = ''
     }

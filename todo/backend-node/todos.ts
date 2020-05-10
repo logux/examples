@@ -1,23 +1,17 @@
 import { Server } from '@logux/server'
 import { isAnonymous } from './auth'
-import { nanoid } from 'nanoid'
-
-interface Todo {
-  id: string,
-  text: string,
-  done: boolean,
-}
+import * as types from '../types/todos'
 
 export default function (server: Server) {
   const storage: {
-    [key: string]: { [key: string]: Todo; };
+    [key: string]: { [key: string]: types.Todo; };
   } = {}
 
-  function userTodos(login: string): { [key: string]: Todo; } {
-    if (!storage[login]) {
-      storage[login] = {}
+  function userTodos(userId: string): { [key: string]: types.Todo; } {
+    if (!storage[userId]) {
+      storage[userId] = {}
     }
-    return storage[login]
+    return storage[userId]
   }
 
   server.channel<{ id: string }>('todos/:id', {
@@ -26,14 +20,11 @@ export default function (server: Server) {
     },
     load(ctx, action, meta) {
       const todos = userTodos(ctx.params.id)
-      Object.entries(todos).forEach(([_, todo]) => ctx.sendBack({ type: 'addTodo', ...todo }))
+      Object.entries(todos).forEach(([_, todo]) => ctx.sendBack(types.add(todo)))
     }
   })
 
-  // newTodo -> addTodo trick show client-server request-response pattern in logux
-  // in real todo app it would be better to generate id on client side
-  // to allow optimistic creation
-  server.type('newTodo', {
+  server.type<ReturnType<typeof types.add>>(types.add.type, {
     access(ctx, action, meta) {
       return !isAnonymous(ctx.userId)
     },
@@ -42,17 +33,12 @@ export default function (server: Server) {
     },
     process(ctx, action, meta) {
       const todos = userTodos(ctx.userId)
-      const todo = {
-        id: nanoid(),
-        text: action.text,
-        done: action.done,
-      }
-      todos[todo.id] = todo
-      ctx.sendBack({ type: 'addTodo', ...todo }, { channel: 'todos' }) // resend to all subscribers
+      // allow add or fully rewrite todo
+      todos[action.payload.id] = action.payload
     }
   })
 
-  server.type('removeTodo', {
+  server.type<ReturnType<typeof types.remove>>(types.remove.type, {
     access(ctx, action, meta) {
       return !isAnonymous(ctx.userId)
     },
@@ -61,11 +47,11 @@ export default function (server: Server) {
     },
     process(ctx, action, meta) {
       const todos = userTodos(ctx.userId)
-      delete todos[action.id]
+      delete todos[action.payload.id]
     }
   })
 
-  server.type('editText', {
+  server.type<ReturnType<typeof types.editText>>(types.editText.type, {
     access(ctx, action, meta) {
       return !isAnonymous(ctx.userId)
     },
@@ -74,11 +60,11 @@ export default function (server: Server) {
     },
     process(ctx, action, meta) {
       const todos = userTodos(ctx.userId)
-      todos[action.id].text = action.text
+      todos[action.payload.id].text = action.payload.text
     }
   })
 
-  server.type('toggle', {
+  server.type<ReturnType<typeof types.toggle>>(types.toggle.type, {
     access(ctx, action, meta) {
       return !isAnonymous(ctx.userId)
     },
@@ -87,7 +73,7 @@ export default function (server: Server) {
     },
     process(ctx, action, meta) {
       const todos = userTodos(ctx.userId)
-      todos[action.id].done = action.done
+      todos[action.payload.id].done = action.payload.done
     }
   })
 }

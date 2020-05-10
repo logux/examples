@@ -5,8 +5,7 @@
   "dependencies": {
     "@logux/server": "^0.8.6",
     "@types/node": "^13.13.5",
-    "jwt-simple": "^0.5.6",
-    "nanoid": "^3.1.6"
+    "jwt-simple": "^0.5.6"
   },
   "devDependencies": {
     "ts-node": "^8.10.1",

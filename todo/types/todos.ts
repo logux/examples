@@ -1,6 +1,6 @@
 import { actionCreatorFactory } from 'typescript-fsa'
 
-let createAction = actionCreatorFactory()
+let createAction = actionCreatorFactory('todo')
 
 export interface TodoId {
   id: string,
@@ -11,10 +11,10 @@ export interface Todo extends TodoId {
   done: boolean,
 }
 
-export const add = createAction<Todo>('todo/add')
+export const add = createAction<Todo>('add')
 
-export const remove = createAction<TodoId>('todo/remove')
+export const remove = createAction<TodoId>('remove')
 
-export const editText = createAction<TodoId & { text: string }>('todo/editText')
+export const editText = createAction<TodoId & { text: string }>('editText')
 
-export const toggle = createAction<TodoId & { done: boolean }>('todo/toggle')
+export const toggle = createAction<TodoId & { done: boolean }>('toggle')

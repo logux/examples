@@ -1,14 +1,14 @@
 import { actionCreatorFactory } from 'typescript-fsa'
 
-let createAction = actionCreatorFactory()
+let createAction = actionCreatorFactory('auth')
 
 export const login = createAction<{
   userId: string,
-}>('auth/login')
+}>('login')
 
 export const loginDone = createAction<{
   userId: string,
   token: string,
-}>('auth/login/done')
+}>('login/done')
 
 export const anonymousUserId = 'anonymous'

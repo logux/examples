@@ -6,8 +6,10 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "@logux/vuex": "^0.3.1",
+    "@logux/vuex": "^0.5.0-beta.2",
     "core-js": "^3.6.4",
+    "todomvc-app-css": "^2.3.0",
+    "todomvc-common": "^1.0.5",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^8.4.1",

@@ -1,5 +1,6 @@
 import jwt from 'jwt-simple'
 import { Server } from '@logux/server'
+import {nanoid} from 'nanoid'
 import { login, loginDone, anonymousUserId } from '../types/auth'
 
 function getSecret(): string {
@@ -17,6 +18,8 @@ const secret = getSecret()
 export function isAnonymous(login: string) {
   return login === anonymousUserId
 }
+
+const users: {[key: string]: string} = {}
 
 export default function (server: Server) {
   server.auth((userId, token) => {
@@ -36,10 +39,13 @@ export default function (server: Server) {
       return isAnonymous(ctx.userId)
     },
     async process(ctx, action, meta) {
-      // check user login and password here
-      // ...
-      let token = jwt.encode({ sub: action.payload.userId }, secret)
-      ctx.sendBack(loginDone({ userId: action.payload.userId, token }))
+      let userId = users[action.payload.login]
+      if(!userId) {
+        userId = nanoid()
+        users[action.payload.login] = userId
+      }
+      let token = jwt.encode({ sub: userId }, secret)
+      ctx.sendBack(loginDone({ userId, token, login: action.payload.login }))
     }
   })
 }

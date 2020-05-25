@@ -43,7 +43,6 @@ export default class Login extends Base {
 </script>
 
 <style scoped>
-
 .auth .new-todo {
   width: 100%;
   padding-left: 20px;

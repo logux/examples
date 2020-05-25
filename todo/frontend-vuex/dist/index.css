@@ -1,80 +1,9 @@
-<template>
-  <section class="todoapp">
-    <!-- header -->
-    <header class="header">
-      <h1>todos</h1>
-      <input class="new-todo"
-        autofocus
-        autocomplete="off"
-        placeholder="What needs to be done?"
-        @keyup.enter="addTodo">
-    </header>
-    <!-- main section -->
-    <section class="main" v-show="todos.length">
-      <input class="toggle-all" id="toggle-all"
-        type="checkbox"
-        :checked="allChecked"
-        @change="toggleAll(!allChecked)">
-      <label for="toggle-all"></label>
-      <ul class="todo-list">
-        <TodoItem
-          v-for="(todo, index) in todos"
-          :key="index"
-          :todo="todo"
-        />
-      </ul>
-    </section>
-    <!-- footer -->
-    <footer class="footer" v-show="todos.length">
-      <span class="todo-count">
-        <strong>{{ remaining }}</strong>
-        {{ remaining | pluralize('item') }} left
-      </span>
-    </footer>
-  </section>
-</template>
-
-<script>
-import TodoItem from './components/TodoItem.vue'
-
-export default {
-  components: { TodoItem },
-  data () {
-    return {}
-  },
-  computed: {
-    todos () {
-      return this.$store.state.todos
-    },
-    allChecked () {
-      return this.todos.every(todo => todo.done)
-    },
-    remaining () {
-      return this.todos.filter(todo => !todo.done).length
-    }
-  },
-  methods: {
-	toggleAll () {
-		this.todos
-			.forEach(todo => {
-				this.$store.commit.sync({ type: 'toggle', id: todo.id, done: !todo.done })
-			})
-	},
-    addTodo (e) {
-	  const text = e.target.value
-      if (text.trim()) {
-        this.$store.commit.sync({ type: 'newTodo', text, done: false})
-      }
-      e.target.value = ''
-    }
-  },
-  filters: {
-    pluralize: (n, w) => n === 1 ? w : (w + 's'),
-    capitalize: s => s.charAt(0).toUpperCase() + s.slice(1)
-  }
+html,
+body {
+	margin: 0;
+	padding: 0;
 }
-</script>
-<style>
+
 button {
 	margin: 0;
 	padding: 0;
@@ -90,8 +19,8 @@ button {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+
 body {
-	display: flex;
 	font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	line-height: 1.4em;
 	background: #f5f5f5;
@@ -103,39 +32,44 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	font-weight: 300;
 }
+
 :focus {
 	outline: 0;
 }
+
 .hidden {
 	display: none;
 }
+
 .todoapp {
-	width: 720px;
-	flex-direction: column;
 	background: #fff;
-	margin: auto;
+	margin: 130px 0 40px 0;
 	position: relative;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
 	            0 25px 50px 0 rgba(0, 0, 0, 0.1);
 }
+
 .todoapp input::-webkit-input-placeholder {
 	font-style: italic;
 	font-weight: 300;
 	color: rgba(0, 0, 0, 0.4);
 }
+
 .todoapp input::-moz-placeholder {
 	font-style: italic;
 	font-weight: 300;
 	color: rgba(0, 0, 0, 0.4);
 }
+
 .todoapp input::input-placeholder {
 	font-style: italic;
 	font-weight: 300;
 	color: rgba(0, 0, 0, 0.4);
 }
+
 .todoapp h1 {
-	/*position: absolute;
-	top: -140px;*/
+	position: absolute;
+	top: -140px;
 	width: 100%;
 	font-size: 80px;
 	font-weight: 200;
@@ -145,10 +79,11 @@ body {
 	-moz-text-rendering: optimizeLegibility;
 	text-rendering: optimizeLegibility;
 }
+
 .new-todo,
 .edit {
 	position: relative;
-	margin: auto;
+	margin: 0;
 	width: 100%;
 	font-size: 24px;
 	font-family: inherit;
@@ -162,18 +97,20 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+
 .new-todo {
 	padding: 16px 16px 16px 60px;
 	border: none;
 	background: rgba(0, 0, 0, 0.003);
 	box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
 }
+
 .main {
-	margin: auto;
 	position: relative;
 	z-index: 2;
 	border-top: 1px solid #e6e6e6;
 }
+
 .toggle-all {
 	width: 1px;
 	height: 1px;
@@ -183,6 +120,7 @@ body {
 	right: 100%;
 	bottom: 100%;
 }
+
 .toggle-all + label {
 	width: 60px;
 	height: 34px;
@@ -193,41 +131,50 @@ body {
 	-webkit-transform: rotate(90deg);
 	transform: rotate(90deg);
 }
+
 .toggle-all + label:before {
 	content: '❯';
 	font-size: 22px;
 	color: #e6e6e6;
 	padding: 10px 27px 10px 27px;
 }
+
 .toggle-all:checked + label:before {
 	color: #737373;
 }
+
 .todo-list {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
+
 .todo-list li {
 	position: relative;
 	font-size: 24px;
 	border-bottom: 1px solid #ededed;
 }
+
 .todo-list li:last-child {
 	border-bottom: none;
 }
+
 .todo-list li.editing {
 	border-bottom: none;
 	padding: 0;
 }
+
 .todo-list li.editing .edit {
 	display: block;
 	width: calc(100% - 43px);
 	padding: 12px 16px;
 	margin: 0 0 0 43px;
 }
+
 .todo-list li.editing .view {
 	display: none;
 }
+
 .todo-list li .toggle {
 	text-align: center;
 	width: 40px;
@@ -241,9 +188,11 @@ body {
 	-webkit-appearance: none;
 	appearance: none;
 }
+
 .todo-list li .toggle {
 	opacity: 0;
 }
+
 .todo-list li .toggle + label {
 	/*
 		Firefox requires `#` to be escaped - https://bugzilla.mozilla.org/show_bug.cgi?id=922433
@@ -253,9 +202,11 @@ body {
 	background-repeat: no-repeat;
 	background-position: center left;
 }
+
 .todo-list li .toggle:checked + label {
 	background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23bddad5%22%20stroke-width%3D%223%22/%3E%3Cpath%20fill%3D%22%235dc2af%22%20d%3D%22M72%2025L42%2071%2027%2056l-4%204%2020%2020%2034-52z%22/%3E%3C/svg%3E');
 }
+
 .todo-list li label {
 	word-break: break-all;
 	padding: 15px 15px 15px 60px;
@@ -265,10 +216,12 @@ body {
 	font-weight: 400;
 	color: #4d4d4d;
 }
+
 .todo-list li.completed label {
 	color: #cdcdcd;
 	text-decoration: line-through;
 }
+
 .todo-list li .destroy {
 	display: none;
 	position: absolute;
@@ -283,21 +236,27 @@ body {
 	margin-bottom: 11px;
 	transition: color 0.2s ease-out;
 }
+
 .todo-list li .destroy:hover {
 	color: #af5b5e;
 }
+
 .todo-list li .destroy:after {
 	content: '×';
 }
+
 .todo-list li:hover .destroy {
 	display: block;
 }
+
 .todo-list li .edit {
 	display: none;
 }
+
 .todo-list li.editing:last-child {
 	margin-bottom: -1px;
 }
+
 .footer {
 	padding: 10px 15px;
 	height: 20px;
@@ -305,6 +264,7 @@ body {
 	font-size: 15px;
 	border-top: 1px solid #e6e6e6;
 }
+
 .footer:before {
 	content: '';
 	position: absolute;
@@ -319,13 +279,16 @@ body {
 	            0 16px 0 -6px #f6f6f6,
 	            0 17px 2px -6px rgba(0, 0, 0, 0.2);
 }
+
 .todo-count {
 	float: left;
 	text-align: left;
 }
+
 .todo-count strong {
 	font-weight: 300;
 }
+
 .filters {
 	margin: 0;
 	padding: 0;
@@ -334,9 +297,11 @@ body {
 	right: 0;
 	left: 0;
 }
+
 .filters li {
 	display: inline;
 }
+
 .filters li a {
 	color: inherit;
 	margin: 3px;
@@ -345,12 +310,15 @@ body {
 	border: 1px solid transparent;
 	border-radius: 3px;
 }
+
 .filters li a:hover {
 	border-color: rgba(175, 47, 47, 0.1);
 }
+
 .filters li a.selected {
 	border-color: rgba(175, 47, 47, 0.2);
 }
+
 .clear-completed,
 html .clear-completed:active {
 	float: right;
@@ -359,9 +327,11 @@ html .clear-completed:active {
 	text-decoration: none;
 	cursor: pointer;
 }
+
 .clear-completed:hover {
 	text-decoration: underline;
 }
+
 .info {
 	margin: 65px auto 0;
 	color: #4d4d4d;
@@ -369,14 +339,17 @@ html .clear-completed:active {
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 	text-align: center;
 }
+
 .info p {
 	line-height: 1;
 }
+
 .info a {
 	color: inherit;
 	text-decoration: none;
 	font-weight: 400;
 }
+
 .info a:hover {
 	text-decoration: underline;
 }
@@ -386,21 +359,22 @@ html .clear-completed:active {
 	Can't use it globally since it destroys checkboxes in Firefox
 */
 @media screen and (-webkit-min-device-pixel-ratio:0) {
-.toggle-all,
+	.toggle-all,
 	.todo-list li .toggle {
 		background: none;
-}
-.todo-list li .toggle {
+	}
+
+	.todo-list li .toggle {
 		height: 40px;
-}
-}
-@media (max-width: 430px) {
-.footer {
-		height: 50px;
-}
-.filters {
-		bottom: 10px;
-}
+	}
 }
 
-</style>
+@media (max-width: 430px) {
+	.footer {
+		height: 50px;
+	}
+
+	.filters {
+		bottom: 10px;
+	}
+}

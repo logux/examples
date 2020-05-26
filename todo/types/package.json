@@ -1,0 +1,8 @@
+{
+  "name": "types",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "typescript-fsa": "^3.0.0"
+  }
+}

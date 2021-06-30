@@ -1,7 +1,7 @@
 # Logux Examples
 
-## redux
+## redux-counter
 
 logux-redux counter example
 
-[/redux](./redux)
+[/redux-counter](./redux-counter)

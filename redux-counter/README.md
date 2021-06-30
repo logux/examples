@@ -1,4 +1,4 @@
-# logux redux example
+# logux redux-counter example
 
 ## usage
 
@@ -9,5 +9,5 @@ cd server && yarn && cd ../client && yarn && cd ..
 
 cd client && yarn start
 
-cd  server && yarn start
+cd server && yarn start
 ```

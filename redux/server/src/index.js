@@ -18,4 +18,22 @@ server.auth(({ userId, token }) => {
   return process.env.NODE_ENV === 'development'
 })
 
+server.type('INC', {
+  access() {
+    return true
+  },
+  process() {
+
+  }
+})
+
+server.type('DEC', {
+  access() {
+    return true
+  },
+  process() {
+    
+  }
+})
+
 server.listen()

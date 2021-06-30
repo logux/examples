@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import {connect} from 'react-redux'
 
-function App() {
+function App({counter, onInc, onDec}) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>counter = {counter}</h1>
+      <button onClick={onInc}>inc</button>
+      <button onClick={onDec}>dec</button>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => state
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onInc: () => dispatch.sync({type: 'INC'}),
+    onDec: () => dispatch.sync({type: 'DEC'}),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

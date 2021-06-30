@@ -19,7 +19,7 @@ const client = new CrossTabClient({
 
 const createStore = createStoreCreator(client)
 
-const store = createStore(reducer)
+const store = createStore(reducer, {}, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 store.client.start()
 

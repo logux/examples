@@ -10,6 +10,10 @@ export default combineReducers({
         return state - 1;
     }
 
+    if (action.type === 'SET_COUNTER') {
+      return action.payload.counter;
+    }
+
     return state;
   },
 })

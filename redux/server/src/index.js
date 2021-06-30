@@ -18,12 +18,23 @@ server.auth(({ userId, token }) => {
   return process.env.NODE_ENV === 'development'
 })
 
+let counter = 0;
+
+server.type('INIT', {
+  access() {
+    return true
+  },
+  process(ctx) {
+    ctx.sendBack({type: 'SET_COUNTER', payload: {counter}})
+  }
+})
+
 server.type('INC', {
   access() {
     return true
   },
   process() {
-
+    counter++;
   }
 })
 
@@ -32,7 +43,7 @@ server.type('DEC', {
     return true
   },
   process() {
-    
+    counter--;
   }
 })
 

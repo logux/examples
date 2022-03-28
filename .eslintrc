@@ -1,10 +1,5 @@
 {
   "extends": "@logux/eslint-config/ts",
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": "tsconfig.json",
-    "tsconfigRootDir": "."
-  },
   "rules": {
     "prefer-let/prefer-let": "off",
     // Because of TS error «an import path cannot end with a '.tsx' extension»

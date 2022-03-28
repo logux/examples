@@ -1,6 +1,8 @@
 {
   "extends": "@logux/eslint-config/ts",
+  "plugins": ["prettier"],
   "rules": {
+    "prettier/prettier": "error",
     "prefer-let/prefer-let": "off",
     // Because of TS error «an import path cannot end with a '.tsx' extension»
     "import/extensions": "off"

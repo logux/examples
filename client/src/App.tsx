@@ -12,7 +12,12 @@ function App(): JSX.Element {
         <img src={logo} className="App-logo" alt="logo" />
         <p>Hello Vite + React!</p>
         <p>
-          <button type="button" onClick={() => { setCount((prevCount) => prevCount + 1); }}>
+          <button
+            type="button"
+            onClick={() => {
+              setCount(prevCount => prevCount + 1)
+            }}
+          >
             count is: {count}
           </button>
         </p>

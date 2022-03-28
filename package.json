@@ -8,7 +8,8 @@
     "client:build": "tsc && vite build",
     "client:preview": "vite preview",
     "server:start": "node --experimental-specifier-resolution=node --loader ts-node/esm ./server/index.ts",
-    "lint:ts": "eslint api client server --config .eslintrc --fix"
+    "lint:ts": "eslint api client server --config .eslintrc --fix",
+    "lint:css": "stylelint '**/*.css' --fix"
   },
   "dependencies": {
     "@logux/client": "^0.15.1",
@@ -34,6 +35,9 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^6.0.0",
     "prettier": "^2.6.1",
+    "stylelint": "^14.6.1",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^25.0.0",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3",
     "vite": "^2.8.0"

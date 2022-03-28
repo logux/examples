@@ -1,6 +1,7 @@
 import { Server } from '@logux/server'
 
 import { subprotocol } from '../api'
+import { applyAuth } from './auth'
 
 const server = new Server(
   Server.loadOptions(process, {
@@ -10,10 +11,14 @@ const server = new Server(
   })
 )
 
-server.autoloadModules().then(() => {
-  server.auth(() => {
-    return true
-  })
+applyAuth(server)
 
-  server.listen()
-})
+server
+  .autoloadModules(
+    process.env.NODE_ENV === 'production'
+      ? 'modules/*.js'
+      : ['modules/*.ts', '!modules/*.test.ts']
+  )
+  .then(() => {
+    server.listen()
+  })

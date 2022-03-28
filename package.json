@@ -2,18 +2,25 @@
   "name": "logux-to-do-example",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "lint:ts": "eslint ./client --config .eslintrc --fix"
+    "client:dev": "vite",
+    "client:build": "tsc && vite build",
+    "client:preview": "vite preview",
+    "server:start": "node --experimental-specifier-resolution=node --loader ts-node/esm ./server/index.ts",
+    "lint:ts": "eslint api client server --config .eslintrc --fix"
   },
   "dependencies": {
+    "@logux/client": "^0.15.1",
+    "@logux/server": "^0.10.8",
+    "@nanostores/react": "^0.1.5",
+    "nanostores": "^0.5.12",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "@logux/eslint-config": "^46.1.1",
+    "@types/node": "^17.0.23",
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
     "@typescript-eslint/eslint-plugin": "^5.16.0",
@@ -27,6 +34,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^6.0.0",
     "prettier": "^2.6.1",
+    "ts-node": "^10.7.0",
     "typescript": "^4.6.3",
     "vite": "^2.8.0"
   }

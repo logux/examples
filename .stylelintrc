@@ -4,19 +4,20 @@
     "stylelint-config-prettier"
   ],
   "rules": {
-    "selector-pseudo-class-no-unknown": [
-      true,
-      {
-        "ignorePseudoClasses": [
-          "global"
-        ]
-      }
-    ],
     "at-rule-no-unknown": [
       true,
       {
         "ignoreAtRules": [
           "import-normalize"
+        ]
+      }
+    ],
+    "selector-no-vendor-prefix": [
+      true,
+      {
+        "ignoreSelectors": [
+          "::-webkit-input-placeholder",
+          "/-moz-.*/"
         ]
       }
     ]

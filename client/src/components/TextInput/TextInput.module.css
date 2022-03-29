@@ -1,0 +1,37 @@
+.text-input {
+  position: relative;
+  width: 100%;
+  font-size: 24px;
+  line-height: 34px;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-weight: inherit;
+
+  &:hover, &:focus {
+    outline: 2px solid rgb(175 47 47 / 15%);
+  }
+
+  &::-webkit-input-placeholder {
+    font-style: italic;
+    font-weight: 300;
+    color: #e6e6e6;
+  }
+
+  &::-moz-placeholder {
+    font-style: italic;
+    font-weight: 300;
+    color: #e6e6e6;
+  }
+
+  &_theme_default {
+    padding: 6px;
+    border: 1px solid #999;
+    box-shadow: inset 0 -1px 5px 0 rgb(0 0 0 / 20%);
+  }
+
+  &_theme_flat {
+    padding: 16px 16px 16px 60px;
+    border: none;
+    box-shadow: inset 0 -2px 1px rgb(0 0 0 / 3%);
+  }
+}

@@ -1,4 +1,4 @@
-import { CrossTabClient, badge, badgeEn, log, confirm } from '@logux/client'
+import { badge, badgeEn, confirm, CrossTabClient, log } from '@logux/client'
 import { badgeStyles } from '@logux/client/badge/styles'
 
 import { subprotocol } from '../../../api'

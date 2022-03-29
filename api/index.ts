@@ -5,3 +5,9 @@ export type User = {
   name: string
   password: string
 }
+
+export type Task = {
+  id: string
+  text: string
+  completed: boolean
+}

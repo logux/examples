@@ -18,7 +18,6 @@ export const AuthForm = (): JSX.Element => {
 
   const handleSubmit = useCallback(event => {
     event.preventDefault()
-    event.stopPropagation()
     auth({
       name: event.currentTarget.login.value,
       password: event.currentTarget.password.value

@@ -2,8 +2,8 @@ import { ChangeEvent, useCallback } from 'react'
 import { changeSyncMapById } from '@logux/client'
 import { useClient, useFilter } from '@logux/client/react'
 
-import styles from './ToggleAction.module.css'
 import { tasksStore } from '../../stores/tasks'
+import styles from './ToggleAction.module.css'
 
 export const ToggleAction = (): JSX.Element => {
   const client = useClient()
@@ -19,15 +19,16 @@ export const ToggleAction = (): JSX.Element => {
     },
     [client, tasks]
   )
+
   return (
     <>
       <input
         id="toggle-all"
-        className={styles.toggleAction}
+        className={styles.action}
         type="checkbox"
         onChange={handleToggleAction}
       />
-      <label htmlFor="toggle-all" className={styles.toggleActionLabel}>
+      <label htmlFor="toggle-all" className={styles.label}>
         Mark all as complete
       </label>
     </>

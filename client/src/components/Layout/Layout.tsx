@@ -17,7 +17,9 @@ export const Layout = ({ children }: Props): JSX.Element => {
       <header>
         <h1 className={styles.title}>todos</h1>
       </header>
+
       <main>{children}</main>
+
       <footer className={styles.footer}>
         {userId && (
           <>

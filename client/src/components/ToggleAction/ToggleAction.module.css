@@ -1,4 +1,4 @@
-.toggle-action-label {
+.label {
   display: block;
   font-size: 0;
   transform: rotate(90deg);
@@ -10,11 +10,11 @@
   }
 }
 
-.toggle-action {
+.action {
   display: none;
   text-align: center;
 
-  &:checked + .toggle-action-label::before {
+  &:checked + .label::before {
     color: var(--dark-gray);
   }
 }

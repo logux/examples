@@ -4,9 +4,9 @@ import { useClient, useFilter } from '@logux/client/react'
 import { deleteSyncMapById } from '@logux/client'
 import { useCallback } from 'react'
 
-import styles from './ControlPanel.module.css'
 import { Filter, filterStore } from '../../stores/filter'
 import { tasksStore } from '../../stores/tasks'
+import styles from './ControlPanel.module.css'
 
 export const ControlPanel = (): JSX.Element => {
   const client = useClient()
@@ -59,7 +59,6 @@ export const ControlPanel = (): JSX.Element => {
             type="button"
             className={cn(
               styles.filtersItemContent,
-              styles.filtersItemContent_selected,
               filter === Filter.completed && styles.filtersItemContentSelected
             )}
             onClick={() => {

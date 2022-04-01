@@ -115,76 +115,82 @@ export const TodosList = (): JSX.Element => {
         <ToggleAction />
       </div>
 
-      <ul className={styles.list}>
-        {tasks.list.map(todo => (
-          <li
-            className={cn(
-              styles.listItem,
-              todo.id === editableItemId && styles.listItemEditable
-            )}
-            key={todo.id}
-          >
-            <div
+      {tasks.isLoading ? (
+        <div className={cn(styles.note, styles.noteTypeSkeleton)}>
+          <span className={styles.label} />
+        </div>
+      ) : (
+        <ul className={styles.list}>
+          {tasks.list.map(todo => (
+            <li
               className={cn(
-                styles.note,
-                todo.completed && styles.noteCompleted
+                styles.listItem,
+                todo.id === editableItemId && styles.listItemEditable
               )}
+              key={todo.id}
             >
-              <input
-                className={styles.checkbox}
-                type="checkbox"
-                id={`todo-${todo.id}`}
+              <div
+                className={cn(
+                  styles.note,
+                  todo.completed && styles.noteCompleted
+                )}
+              >
+                <input
+                  className={styles.checkbox}
+                  type="checkbox"
+                  id={`todo-${todo.id}`}
+                  onChange={event => {
+                    changeSyncMapById(client, tasksStore, todo.id, {
+                      completed: Boolean(event.target.checked)
+                    })
+                  }}
+                  checked={todo.completed}
+                />
+                <label
+                  className={styles.label}
+                  htmlFor={`todo-${todo.id}`}
+                  onClick={event => {
+                    handleItemClick(event)
+                  }}
+                  onDoubleClick={event => {
+                    handleItemDoubleClick(event, todo.id, todo.text)
+                  }}
+                >
+                  {todo.text}
+                </label>
+                <button
+                  className={styles.deleteControl}
+                  type="button"
+                  onClick={() => {
+                    deleteSyncMapById(client, tasksStore, todo.id)
+                  }}
+                >
+                  Delete task
+                </button>
+              </div>
+              <TextInput
+                id="create-new-task"
+                label="Create new task"
+                placeholder="What needs to be done?"
+                theme="default"
+                className={styles.textInput}
+                value={todo.text}
+                ref={ref => {
+                  itemLabelRefs[todo.id] = ref
+                }}
+                onKeyDown={event => {
+                  handleKeyDown(event, todo.id)
+                }}
                 onChange={event => {
                   changeSyncMapById(client, tasksStore, todo.id, {
-                    completed: Boolean(event.target.checked)
+                    text: event.target.value
                   })
                 }}
-                checked={todo.completed}
               />
-              <label
-                className={styles.label}
-                htmlFor={`todo-${todo.id}`}
-                onClick={event => {
-                  handleItemClick(event)
-                }}
-                onDoubleClick={event => {
-                  handleItemDoubleClick(event, todo.id, todo.text)
-                }}
-              >
-                {todo.text}
-              </label>
-              <button
-                className={styles.deleteControl}
-                type="button"
-                onClick={() => {
-                  deleteSyncMapById(client, tasksStore, todo.id)
-                }}
-              >
-                Delete task
-              </button>
-            </div>
-            <TextInput
-              id="create-new-task"
-              label="Create new task"
-              placeholder="What needs to be done?"
-              theme="default"
-              className={styles.textInput}
-              value={todo.text}
-              ref={ref => {
-                itemLabelRefs[todo.id] = ref
-              }}
-              onKeyDown={event => {
-                handleKeyDown(event, todo.id)
-              }}
-              onChange={event => {
-                changeSyncMapById(client, tasksStore, todo.id, {
-                  text: event.target.value
-                })
-              }}
-            />
-          </li>
-        ))}
-      </ul>
+            </li>
+          ))}
+        </ul>
+      )}
 
       <ControlPanel />
     </div>

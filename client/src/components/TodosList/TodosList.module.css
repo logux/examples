@@ -41,6 +41,20 @@
       text-decoration: line-through;
     }
   }
+
+  &_type_skeleton {
+    & .label {
+      &::before {
+        display: block;
+        width: 170px;
+        height: 34px;
+        content: "";
+        background: var(--light-gray);
+      }
+
+      background-color: var(--white);
+    }
+  }
 }
 
 .text-input {

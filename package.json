@@ -19,9 +19,11 @@
     "@logux/server": "^0.10.8",
     "@nanostores/react": "^0.1.5",
     "classnames": "^2.3.1",
+    "nanoid": "^3.3.2",
     "nanostores": "^0.5.12",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "wouter": "^2.8.0-alpha.2"
   },
   "devDependencies": {
     "@logux/eslint-config": "^46.1.1",

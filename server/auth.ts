@@ -42,7 +42,7 @@ export function applyAuth(server: BaseServer): void {
         if (sessionData !== null) {
           res.setHeader(
             'Set-Cookie',
-            `${cookieSessionIdKey}=${sessionData[0]}; Path=/; HttpOnly;`
+            `${cookieSessionIdKey}=${sessionData[0]}; Path=/;`
           )
 
           res.write(JSON.stringify({ id: sessionData[1].id }))
@@ -71,7 +71,7 @@ export function applyAuth(server: BaseServer): void {
     }
   })
 
-  server.auth(({ cookie }) => {
-    return activeSessions.has(cookie[cookieSessionIdKey])
+  server.auth(props => {
+    return activeSessions.has(props.cookie[cookieSessionIdKey])
   })
 }

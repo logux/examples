@@ -1,0 +1,22 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.field {
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  & + .action {
+    margin-top: 12px;
+  }
+}
+
+.label {
+  margin-bottom: 4px;
+}

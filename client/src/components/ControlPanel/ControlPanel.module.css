@@ -46,8 +46,13 @@
   color: #777;
   font-weight: 300;
 
-  &:hover, &:focus {
+  &:hover {
     border-color: rgb(175 47 47 / 10%);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: rgb(175 47 47 / 20%);
   }
 
   &_selected {

@@ -1,12 +1,17 @@
 import { ReactNode } from 'react'
+import { Link } from 'wouter'
+import { useStore } from '@nanostores/react'
 
 import styles from './Layout.module.css'
+import { authStore } from '../../stores/auth'
 
 type Props = {
   children: ReactNode
 }
 
 export const Layout = ({ children }: Props): JSX.Element => {
+  const { id: userId } = useStore(authStore)
+
   return (
     <div className={styles.layout}>
       <header>
@@ -14,7 +19,16 @@ export const Layout = ({ children }: Props): JSX.Element => {
       </header>
       <main>{children}</main>
       <footer className={styles.footer}>
-        <p>Double-click to edit a todo</p>
+        {userId && (
+          <>
+            <p>
+              <Link className={styles.footerLink} to="/logout">
+                Logout
+              </Link>
+            </p>
+            <p>Double-click to edit a todo</p>
+          </>
+        )}
         <p>
           Template by{' '}
           <a className={styles.footerLink} href="https://sindresorhus.com">

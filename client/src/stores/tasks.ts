@@ -2,4 +2,4 @@ import { syncMapTemplate } from '@logux/client'
 
 import { Task } from '../../../api'
 
-export const tasks = syncMapTemplate<Task>('tasks')
+export const tasksStore = syncMapTemplate<Task>('tasks')

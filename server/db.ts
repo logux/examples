@@ -4,18 +4,20 @@ let users = [
   { id: '1', name: 'admin', password: 'admin' },
   { id: '2', name: 'user', password: 'user' }
 ]
-let tasks: Task[] = [
-  { id: '1', text: 'Create logux example app', completed: false }
-]
+let tasks = [{ id: '1', text: 'Create logux example app', completed: false }]
 let userTasks: Record<string, string[]> = { '1': ['1'], '2': [] }
 
 export function findUser(name: string): User | undefined {
   return users.find(it => it.name === name)
 }
 
-export function getUserTasks(): Promise<Task[]> {
-  // return Promise.resolve(tasks.filter(it => userTasks[userId].includes(it.id)))
-  return Promise.resolve(tasks)
+export function getUserTasks(userId: string): Promise<Task[]> {
+  const newTasks = tasks.filter(it => userTasks[userId].includes(it.id))
+  return Promise.resolve(newTasks)
+}
+
+export function findTask(taskId: string): Promise<Task | undefined> {
+  return Promise.resolve(tasks.find(it => it.id === taskId))
 }
 
 export function createTask(userId: string, task: Task): Promise<Task> {
@@ -33,4 +35,14 @@ export function changeTask(
     return { ...it, ...patch }
   })
   return Promise.resolve(tasks.find(it => it.id === taskId)!)
+}
+
+export function deleteTask(taskId: string): Promise<void> {
+  tasks = tasks.filter(it => it.id !== taskId)
+
+  users.forEach(user => {
+    userTasks[user.id].filter(id => id !== taskId)
+  })
+
+  return Promise.resolve()
 }

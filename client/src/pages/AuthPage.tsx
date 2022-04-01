@@ -1,5 +1,6 @@
 import { useStore } from '@nanostores/react'
 import { useLocation } from 'wouter'
+import { useEffect } from 'react'
 
 import { AuthForm } from '../components/AuthForm/AuthForm'
 import { authStore } from '../stores/auth'
@@ -9,9 +10,11 @@ export const AuthPage = (): JSX.Element => {
 
   const [, setLocation] = useLocation()
 
-  if (userId) {
-    setLocation('/')
-  }
+  useEffect(() => {
+    if (userId) {
+      setLocation('/')
+    }
+  }, [userId])
 
   return <AuthForm />
 }

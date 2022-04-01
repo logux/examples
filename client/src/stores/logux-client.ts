@@ -8,7 +8,7 @@ import { authStore, logout } from './auth'
 
 export const clientStore = atom<Client>()
 
-const LOGUX_SERVER = `${
+const loguxServer = `${
   window.location.protocol.endsWith('s') ? 'wss' : 'ws'
 }://${window.location.host}/logux`
 
@@ -16,7 +16,7 @@ onMount(clientStore, () => {
   const client = new CrossTabClient({
     subprotocol,
     userId: '',
-    server: LOGUX_SERVER
+    server: loguxServer
   })
 
   badge(client, { messages: badgeEn, styles: badgeStyles })

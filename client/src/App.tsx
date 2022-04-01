@@ -2,6 +2,7 @@ import { ClientContext, ErrorsContext } from '@logux/client/react'
 import { Router, Route } from 'wouter'
 import { useStore } from '@nanostores/react'
 
+import './styles/theme.css'
 import './styles/base.css'
 
 import { Layout } from './components/Layout/Layout'

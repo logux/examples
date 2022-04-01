@@ -1,7 +1,6 @@
 {
   "extends": [
-    "stylelint-config-standard",
-    "stylelint-config-prettier"
+    "@logux/stylelint-config"
   ],
   "rules": {
     "at-rule-no-unknown": [

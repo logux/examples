@@ -1,20 +1,20 @@
 .toggle-action-label {
-  transform: rotate(90deg);
-  font-size: 0;
   display: block;
+  font-size: 0;
+  transform: rotate(90deg);
 
   &::before {
-    content: '❯';
     font-size: 22px;
-    color: #e6e6e6;
+    color: var(--light-gray);
+    content: "❯";
   }
 }
 
 .toggle-action {
-  text-align: center;
   display: none;
+  text-align: center;
 
   &:checked + .toggle-action-label::before {
-    color: #737373;
+    color: var(--dark-gray);
   }
 }

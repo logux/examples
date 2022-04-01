@@ -92,6 +92,7 @@ export const TodosList = (): JSX.Element => {
         <ul className={styles.list}>
           {tasks.list.map(todo => (
             <TodosListItem
+              key={todo.id}
               id={todo.id}
               completed={todo.completed}
               text={todo.text}

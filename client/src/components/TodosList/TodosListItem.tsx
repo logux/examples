@@ -69,7 +69,6 @@ export const TodosListItem = ({ id, completed, text }: Props): JSX.Element => {
         styles.listItem,
         id === editableItemId && styles.listItemEditable
       )}
-      key={id}
     >
       <div className={cn(styles.note, completed && styles.noteCompleted)}>
         <input

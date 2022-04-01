@@ -7,11 +7,13 @@ import { useCallback } from 'react'
 import { Filter, filterStore } from '../../stores/filter'
 import { tasksStore } from '../../stores/tasks'
 import styles from './ControlPanel.module.css'
+import { authStore } from '../../stores/auth'
 
 export const ControlPanel = (): JSX.Element => {
   const client = useClient()
   const filter = useStore(filterStore)
-  const tasks = useFilter(tasksStore)
+  const { id: userId } = useStore(authStore)
+  const tasks = useFilter(tasksStore, { userId })
   const activeTasksCount = tasks.list.filter(task => !task.completed).length
 
   const handleClearCompletedClick = useCallback(() => {

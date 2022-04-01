@@ -4,7 +4,9 @@ let users = [
   { id: '1', name: 'admin', password: 'admin' },
   { id: '2', name: 'user', password: 'user' }
 ]
-let tasks = [{ id: '1', text: 'Create logux example app', completed: false }]
+let tasks: Task[] = [
+  { id: '1', text: 'Create logux example app', completed: false, userId: '1' }
+]
 let userTasks: Record<string, string[]> = { '1': ['1'], '2': [] }
 
 export function findUser(name: string): User | undefined {
@@ -12,8 +14,7 @@ export function findUser(name: string): User | undefined {
 }
 
 export function getUserTasks(userId: string): Promise<Task[]> {
-  const newTasks = tasks.filter(it => userTasks[userId].includes(it.id))
-  return Promise.resolve(newTasks)
+  return Promise.resolve(tasks.filter(it => userTasks[userId].includes(it.id)))
 }
 
 export function findTask(taskId: string): Promise<Task | undefined> {

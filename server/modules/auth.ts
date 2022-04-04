@@ -42,7 +42,7 @@ export default function applyAuth(server: BaseServer): void {
         if (sessionData !== null) {
           res.setHeader(
             'Set-Cookie',
-            `${cookieSessionIdKey}=${sessionData[0]}; Path=/;`
+            `${cookieSessionIdKey}=${sessionData[0]}; Path=/; HttpOnly;`
           )
 
           res.write(JSON.stringify({ id: sessionData[1].id }))

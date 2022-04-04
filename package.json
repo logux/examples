@@ -15,6 +15,7 @@
     "lint:css": "stylelint '**/*.css' --fix"
   },
   "dependencies": {
+    "@logux/actions": "^0.2.3",
     "@logux/client": "^0.15.1",
     "@logux/server": "^0.10.8",
     "@logux/stylelint-config": "^0.9.0",

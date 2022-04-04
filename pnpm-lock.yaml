@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@logux/actions': ^0.2.3
   '@logux/client': ^0.15.1
   '@logux/eslint-config': ^46.1.1
   '@logux/server': ^0.10.8
@@ -34,6 +35,7 @@ specifiers:
   wouter: ^2.8.0-alpha.2
 
 dependencies:
+  '@logux/actions': 0.2.3
   '@logux/client': 0.15.1_1411f9810238fe38ef2aa0405803a088
   '@logux/server': 0.10.8
   '@logux/stylelint-config': 0.9.0_stylelint@14.6.1

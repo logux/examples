@@ -16,7 +16,7 @@
       {
         "ignoreSelectors": [
           "::-webkit-input-placeholder",
-          "/-moz-.*/"
+          "::-moz-placeholder"
         ]
       }
     ]

@@ -1,7 +1,6 @@
 import { Server } from '@logux/server'
 
 import { subprotocol } from '../api'
-import { applyAuth } from './auth'
 
 const server = new Server(
   Server.loadOptions(process, {
@@ -10,8 +9,6 @@ const server = new Server(
     fileUrl: import.meta.url
   })
 )
-
-applyAuth(server)
 
 server
   .autoloadModules(

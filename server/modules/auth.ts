@@ -1,8 +1,8 @@
 import { BaseServer } from '@logux/server/base-server'
 import { IncomingMessage } from 'http'
 
-import { findUser } from './db'
-import { User } from '../api'
+import { findUser } from '../db'
+import { User } from '../../api'
 
 const cookieSessionIdKey = 'sessionId'
 const activeSessions = new Map<string, boolean>()
@@ -33,7 +33,7 @@ async function signIn(req: IncomingMessage): Promise<[string, User] | null> {
   })
 }
 
-export function applyAuth(server: BaseServer): void {
+export default function applyAuth(server: BaseServer): void {
   server.http(async (req, res) => {
     if (req.url === '/auth') {
       if (req.method === 'POST') {

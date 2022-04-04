@@ -5,7 +5,7 @@ import { subprotocol } from '../api'
 const server = new Server(
   Server.loadOptions(process, {
     subprotocol,
-    supports: '1.x',
+    supports: subprotocol,
     fileUrl: import.meta.url
   })
 )

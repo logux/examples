@@ -1,8 +1,8 @@
 import { BaseServer } from '@logux/server/base-server'
 import { IncomingMessage } from 'http'
 
-import { findUser } from '../db'
-import { User } from '../../api'
+import { findUser } from '../db.js'
+import { User } from '../../api/index.js'
 
 const cookieSessionIdKey = 'sessionId'
 const activeSessions = new Map<string, boolean>()

@@ -5,14 +5,14 @@ import { useStore } from '@nanostores/react'
 import './styles/theme.css'
 import './styles/base.css'
 
-import { Layout } from './components/Layout/Layout'
-import { clientStore } from './stores/logux-client'
-import { MainPage } from './pages/MainPage'
-import { AccessDeniedPage } from './pages/AccessDeniedPage'
-import { ErrorPage } from './pages/ErrorPage'
-import { NotFoundPage } from './pages/NotFoundPage'
-import { AuthPage } from './pages/AuthPage'
-import { LogoutPage } from './pages/Logout'
+import { AccessDeniedPage } from './pages/AccessDeniedPage.js'
+import { AuthPage } from './pages/AuthPage.js'
+import { ErrorPage } from './pages/ErrorPage.js'
+import { LogoutPage } from './pages/Logout.js'
+import { MainPage } from './pages/MainPage.js'
+import { NotFoundPage } from './pages/NotFoundPage.js'
+import { Layout } from './components/Layout/Layout.js'
+import { clientStore } from './stores/logux-client.js'
 
 const errorPages = {
   NotFound: NotFoundPage,

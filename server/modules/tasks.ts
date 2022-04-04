@@ -8,14 +8,14 @@ import {
   defineDeleteSyncMap
 } from '@logux/actions'
 
-import { Task } from '../../api'
+import { Task } from '../../api/index.js'
 import {
   changeTask,
   createTask,
   deleteTask,
   findTask,
   getUserTasks
-} from '../db'
+} from '../db.js'
 
 const channel = 'tasks'
 

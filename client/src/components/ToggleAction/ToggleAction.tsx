@@ -2,7 +2,7 @@ import { ChangeEvent, useCallback } from 'react'
 import { changeSyncMapById } from '@logux/client'
 import { useClient, useFilter } from '@logux/client/react'
 
-import { tasksStore } from '../../stores/tasks'
+import { tasksStore } from '../../stores/tasks.js'
 import styles from './ToggleAction.module.css'
 
 export const ToggleAction = (): JSX.Element => {

@@ -2,8 +2,8 @@ import { ReactNode } from 'react'
 import { Link } from 'wouter'
 import { useStore } from '@nanostores/react'
 
+import { authStore } from '../../stores/auth.js'
 import styles from './Layout.module.css'
-import { authStore } from '../../stores/auth'
 
 type Props = {
   children: ReactNode

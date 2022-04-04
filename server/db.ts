@@ -1,4 +1,4 @@
-import { Task, User } from '../api'
+import { Task, User } from '../api/index.js'
 
 let users = [
   { id: '1', name: 'admin', password: 'admin' },

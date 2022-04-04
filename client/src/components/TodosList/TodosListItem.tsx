@@ -3,8 +3,8 @@ import { useClient } from '@logux/client/react'
 import { changeSyncMapById, deleteSyncMapById } from '@logux/client'
 import { useCallback, useEffect, useState, KeyboardEvent } from 'react'
 
-import { TextInput } from '../TextInput/TextInput'
-import { tasksStore } from '../../stores/tasks'
+import { TextInput } from '../TextInput/TextInput.js'
+import { tasksStore } from '../../stores/tasks.js'
 import styles from './TodosList.module.css'
 
 type Props = {

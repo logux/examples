@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react'
 
+import { auth } from '../../stores/auth.js'
+import { TextInput } from '../TextInput/TextInput.js'
 import styles from './AuthForm.module.css'
-import { auth } from '../../stores/auth'
-import { TextInput } from '../TextInput/TextInput'
 
 export const AuthForm = (): JSX.Element => {
   const [login, setLogin] = useState('admin')

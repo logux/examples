@@ -3,8 +3,8 @@ import { badgeStyles } from '@logux/client/badge/styles'
 import { atom, onMount } from 'nanostores'
 import { Client } from '@logux/client/client'
 
-import { subprotocol } from '../../../api'
-import { authStore, logout } from './auth'
+import { subprotocol } from '../../../api/index.js'
+import { authStore, logout } from './auth.js'
 
 export const clientStore = atom<Client>()
 

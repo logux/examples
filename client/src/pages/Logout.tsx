@@ -2,7 +2,7 @@ import { useStore } from '@nanostores/react'
 import { useLocation } from 'wouter'
 import { useEffect } from 'react'
 
-import { authStore, logout } from '../stores/auth'
+import { authStore, logout } from '../stores/auth.js'
 
 export const LogoutPage = (): null => {
   const { id: userId } = useStore(authStore)

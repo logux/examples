@@ -4,10 +4,10 @@ import { useClient, useFilter } from '@logux/client/react'
 import { deleteSyncMapById } from '@logux/client'
 import { useCallback } from 'react'
 
-import { Filter, filterStore } from '../../stores/filter'
-import { tasksStore } from '../../stores/tasks'
+import { Filter, filterStore } from '../../stores/filter.js'
+import { tasksStore } from '../../stores/tasks.js'
+import { authStore } from '../../stores/auth.js'
 import styles from './ControlPanel.module.css'
-import { authStore } from '../../stores/auth'
 
 export const ControlPanel = (): JSX.Element => {
   const client = useClient()

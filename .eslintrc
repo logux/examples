@@ -1,8 +1,6 @@
 {
   "extends": "@logux/eslint-config/ts",
-  "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": "error",
     "prefer-let/prefer-let": "off",
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": ["error"]

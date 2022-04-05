@@ -1,0 +1,21 @@
+{
+  "name": "logux-to-do-example-server",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "start": "node --experimental-specifier-resolution=node --loader ts-node/esm ./index.ts"
+  },
+  "dependencies": {
+    "@logux/actions": "^0.2.3",
+    "@logux/core": "^0.7.3",
+    "@logux/server": "^0.10.8"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.23",
+    "ts-node": "^10.7.0"
+  }
+}

@@ -2,8 +2,8 @@ import { map } from 'nanostores'
 
 import { signIn, logout as logoutRequest } from '../lib/api.js'
 
-export const authStore = map<{ id: string | null }>({
-  id: localStorage.getItem('id')
+export const authStore = map<{ id?: string }>({
+  id: localStorage.getItem('id') ?? undefined
 })
 
 export async function auth(data: {
@@ -19,11 +19,11 @@ export async function auth(data: {
 
 export function logout(): void {
   logoutRequest()
-  authStore.setKey('id', null)
+  authStore.setKey('id', undefined)
 }
 
 authStore.subscribe(
-  ({ id }: { id: string | null }, changedKey: string | undefined) => {
+  ({ id }: { id?: string }, changedKey: string | undefined) => {
     if (changedKey === 'id') {
       if (id) {
         localStorage.setItem('id', id)

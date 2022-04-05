@@ -11,7 +11,7 @@
   "dependencies": {
     "@logux/actions": "^0.2.3",
     "@logux/core": "^0.7.3",
-    "@logux/server": "^0.10.8"
+    "@logux/server": "github:logux/server#main"
   },
   "devDependencies": {
     "@types/node": "^17.0.23",

@@ -7,8 +7,13 @@ export type User = {
 }
 
 export type Task = {
-  id: string
   text: string
   completed: boolean
-  userId: string | null
+  authorId?: string
 }
+
+export type TaskRecord = {
+  id: string
+  textChangeTime: number
+  completedChangeTime: number
+} & Task

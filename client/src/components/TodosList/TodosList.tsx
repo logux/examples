@@ -1,9 +1,9 @@
 import cn from 'classnames'
 import { useClient, useFilter } from '@logux/client/react'
 import { createSyncMap } from '@logux/client'
-import { nanoid } from 'nanoid'
 import { useCallback, useEffect, useState } from 'react'
 import { useStore } from '@nanostores/react'
+import { nanoid } from 'nanoid'
 
 import { ControlPanel } from '../ControlPanel/ControlPanel.js'
 import { TextInput } from '../TextInput/TextInput.js'
@@ -16,16 +16,17 @@ import styles from './TodosList.module.css'
 
 export const TodosList = (): JSX.Element => {
   const client = useClient()
-  const { id: userId } = useStore(authStore)
   const filter = useStore(filterStore)
+  const { id: authorId } = useStore(authStore)
   const [editableItemId, setEditableItemId] = useState('')
   const [newTaskTitle, setNewTaskTitle] = useState('')
-  const itemLabelRefs: { [key: string]: HTMLInputElement | null } = {}
 
   const tasks = useFilter(tasksStore, {
-    userId,
-    ...(filter !== Filter.all ? { completed: filter === Filter.completed } : {})
+    authorId,
+    ...(filter === Filter.all ? {} : { completed: filter === Filter.completed })
   })
+
+  const itemLabelRefs: { [key: string]: HTMLInputElement | null } = {}
 
   const handleNewTaskInputChange = useCallback(event => {
     setNewTaskTitle(event.target.value)
@@ -48,7 +49,7 @@ export const TodosList = (): JSX.Element => {
         id: nanoid(),
         text: newTaskTitle,
         completed: false,
-        userId
+        authorId
       })
 
       setNewTaskTitle('')

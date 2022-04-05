@@ -12,8 +12,8 @@ import styles from './ControlPanel.module.css'
 export const ControlPanel = (): JSX.Element => {
   const client = useClient()
   const filter = useStore(filterStore)
-  const { id: userId } = useStore(authStore)
-  const tasks = useFilter(tasksStore, { userId })
+  const { id: authorId } = useStore(authStore)
+  const tasks = useFilter(tasksStore, { authorId })
   const activeTasksCount = tasks.list.filter(task => !task.completed).length
 
   const handleClearCompletedClick = useCallback(() => {

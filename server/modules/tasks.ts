@@ -1,14 +1,12 @@
-import { BaseServer } from '@logux/server/base-server'
 import {
-  defineChangedSyncMap,
-  defineChangeSyncMap,
-  defineCreatedSyncMap,
-  defineCreateSyncMap,
-  defineDeletedSyncMap,
-  defineDeleteSyncMap
-} from '@logux/actions'
+  addSyncMap,
+  addSyncMapFilter,
+  BaseServer,
+  ChangedAt,
+  NoConflictResolution
+} from '@logux/server'
+import { defineSyncMapActions, LoguxNotFoundError } from '@logux/actions'
 
-import { Task } from '../../api/index.js'
 import {
   changeTask,
   createTask,
@@ -16,110 +14,78 @@ import {
   findTask,
   getUserTasks
 } from '../db.js'
+import { Task } from '../../api/index.js'
 
-const channel = 'tasks'
+const modelName = 'tasks'
+
+const [createTaskActionType] = defineSyncMapActions(modelName)
 
 export default (server: BaseServer): void => {
-  const createAction = defineCreateSyncMap<Task>(channel)
-  const changeAction = defineChangeSyncMap<Task>(channel)
-  const deleteAction = defineDeleteSyncMap(channel)
+  addSyncMap<Task>(server, modelName, {
+    async access(ctx, id, action) {
+      if (createTaskActionType.type === action.type && 'fields' in action) {
+        return ctx.userId === action.fields.authorId
+      } else {
+        const task = await findTask(id)
+        return ctx.userId === task?.authorId
+      }
+    },
 
-  const createdAction = defineCreatedSyncMap<Task>(channel)
-  const changedAction = defineChangedSyncMap<Task>(channel)
-  const deletedAction = defineDeletedSyncMap(channel)
+    async load(ctx, id) {
+      const task = await findTask(id)
 
-  server.channel(channel, {
-    async accessAndLoad(ctx) {
+      if (!task) throw new LoguxNotFoundError()
+
+      return {
+        id,
+        text: ChangedAt(task.text, task.textChangeTime),
+        completed: ChangedAt(task.completed, task.completedChangeTime),
+        authorId: NoConflictResolution(task.authorId)
+      }
+    },
+
+    create(ctx, id, fields, time) {
+      createTask(ctx.userId, {
+        id,
+        ...fields,
+        textChangeTime: time,
+        completedChangeTime: time
+      })
+    },
+
+    async change(ctx, id, fields) {
+      const task = await findTask(id)
+
+      if (!task) throw new LoguxNotFoundError()
+
+      await changeTask(id, fields)
+    },
+
+    async delete(ctx, id) {
+      await deleteTask(id)
+    }
+  })
+
+  addSyncMapFilter<Task>(server, modelName, {
+    access(ctx, id, action) {
+      return ctx.userId === action.filter?.authorId
+    },
+
+    async initial(ctx) {
       const tasks = await getUserTasks(ctx.userId)
 
-      const actions = tasks.map(task =>
-        createdAction({
-          id: task.id,
-          fields: task
-        })
-      )
-
-      tasks.forEach((task: Task) => {
-        server.subscribe(ctx.nodeId, `${channel}/${task.id}`)
-      })
-
-      return actions
+      return tasks.map(task => ({
+        id: task.id,
+        text: ChangedAt(task.text, task.textChangeTime),
+        completed: ChangedAt(task.completed, task.completedChangeTime),
+        authorId: NoConflictResolution(task.authorId)
+      }))
     },
 
-    filter(subscriber) {
-      return ctx => {
-        return ctx.userId === subscriber.userId
+    actions(filterCtx) {
+      return actionCtx => {
+        return actionCtx.userId === filterCtx.userId
       }
-    }
-  })
-
-  server.channel<{ id: string }>(`${channel}/:id`, {
-    async accessAndLoad(ctx) {
-      let task
-
-      try {
-        task = await findTask(ctx.params.id)
-      } catch (e) {
-        server.logger.error(
-          { error: JSON.stringify(e) },
-          'Error while getting resource'
-        )
-        throw e
-      }
-
-      if (task) {
-        return createdAction({ id: task.id, fields: task })
-      } else {
-        return []
-      }
-    }
-  })
-
-  server.type(createdAction, {
-    access() {
-      return false
-    },
-
-    resend() {
-      return channel
-    }
-  })
-
-  server.type(changedAction, {
-    access() {
-      return false
-    },
-
-    resend(ctx, action) {
-      return [channel, `${channel}/${action.id}`]
-    }
-  })
-
-  server.type(createAction, {
-    async accessAndProcess(ctx, action) {
-      await createTask(ctx.userId, { id: action.id, ...action.fields })
-
-      await server.log.add(
-        createdAction({ id: action.id, fields: action.fields })
-      )
-    }
-  })
-
-  server.type(changeAction, {
-    async accessAndProcess(ctx, action) {
-      await changeTask(action.id, action.fields)
-
-      await server.log.add(
-        changedAction({ id: action.id, fields: action.fields })
-      )
-    }
-  })
-
-  server.type(deleteAction, {
-    async accessAndProcess(ctx, action) {
-      await deleteTask(action.id)
-
-      await server.log.add(deletedAction({ id: action.id }))
     }
   })
 }

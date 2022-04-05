@@ -1,7 +1,7 @@
 import cn from 'classnames'
 import { useClient } from '@logux/client/react'
 import { changeSyncMapById, deleteSyncMapById } from '@logux/client'
-import { useCallback, useEffect, useState, KeyboardEvent } from 'react'
+import { KeyboardEvent, useCallback, useEffect, useState } from 'react'
 
 import { TextInput } from '../TextInput/TextInput.js'
 import { tasksStore } from '../../stores/tasks.js'

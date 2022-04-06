@@ -28,7 +28,7 @@ importers:
 
   client:
     specifiers:
-      '@logux/client': ^0.15.1
+      '@logux/client': ^0.15.2
       '@logux/core': ^0.7.3
       '@logux/stylelint-config': ^0.9.0
       '@nanostores/react': ^0.1.5
@@ -42,23 +42,23 @@ importers:
       postcss: ^8.4.12
       postcss-nested: ^5.0.5
       postcss-normalize: ^10.0.0
-      react: ^17.0.2
-      react-dom: ^17.0.2
+      react: ^18.0.0
+      react-dom: ^18.0.0
       stylelint: ^14.6.1
       typescript: ^4.6.3
       vite: ^2.8.0
       wouter: ^2.8.0-alpha.2
     dependencies:
-      '@logux/client': 0.15.1_fb49fbd731ef7ce807fd784e85629a53
+      '@logux/client': 0.15.2_03225b88cdc8f7ceae299c1d6407cf5a
       '@logux/core': 0.7.3
-      '@nanostores/react': 0.1.5_f66e5a41ef8212ca2b6be35009893a5b
+      '@nanostores/react': 0.1.5_33de46f26c75888291546388c72611d1
       classnames: 2.3.1
       nanoid: 3.3.2
       nanostores: 0.5.12
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
+      react: 18.0.0
+      react-dom: 18.0.0_react@18.0.0
       typescript: 4.6.3
-      wouter: 2.8.0-alpha.2_react@17.0.2
+      wouter: 2.8.0-alpha.2_react@18.0.0
     devDependencies:
       '@logux/stylelint-config': 0.9.0_stylelint@14.6.1
       '@types/react': 17.0.43
@@ -429,17 +429,17 @@ packages:
       '@logux/core': 0.7.3
     dev: false
 
-  /@logux/client/0.15.1_fb49fbd731ef7ce807fd784e85629a53:
-    resolution: {integrity: sha512-vVNdqRYdwNNOvydEz8Oll8eonRv/l4FNIL7/jlZjNyEoQCrLJf7txFXpyxk9GJ4ks88H7nVzyNRzrTXZ1iaFFw==}
+  /@logux/client/0.15.2_03225b88cdc8f7ceae299c1d6407cf5a:
+    resolution: {integrity: sha512-h7p2mI9H7Mkrtmv/c8GwPgINzpXHwqbDGdV0Z3KICOfKjiYYObebiMrd9DdzsRb9KUi9C00s8b8Gwe4E9ASRUA==}
     engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
     peerDependencies:
       '@logux/core': ^0.7.0
-      '@nanostores/preact': ^0.0.0
-      '@nanostores/react': ^0.0.0
-      '@nanostores/vue': '>=0.5.5'
+      '@nanostores/preact': '>=0.0.0'
+      '@nanostores/react': '>=0.0.0'
+      '@nanostores/vue': '>=0.0.0'
       nanostores: ^0.5.0
       preact: '>=10.0.0'
-      react: '>=16.8.0'
+      react: '>=18.0.0'
       react-dom: '>=16.8.0'
       vue: '>=3.2.30'
     peerDependenciesMeta:
@@ -460,14 +460,14 @@ packages:
     dependencies:
       '@logux/actions': 0.2.3_@logux+core@0.7.3
       '@logux/core': 0.7.3
-      '@nanostores/react': 0.1.5_f66e5a41ef8212ca2b6be35009893a5b
+      '@nanostores/react': 0.1.5_33de46f26c75888291546388c72611d1
       fast-json-stable-stringify: 2.1.0
       nanodelay: 2.0.2
       nanoevents: 6.0.2
       nanoid: 3.3.2
       nanostores: 0.5.12
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
+      react: 18.0.0
+      react-dom: 18.0.0_react@18.0.0
     dev: false
 
   /@logux/core/0.7.3:
@@ -535,7 +535,7 @@ packages:
       stylelint-order: 5.0.0_stylelint@14.6.1
     dev: true
 
-  /@nanostores/react/0.1.5_f66e5a41ef8212ca2b6be35009893a5b:
+  /@nanostores/react/0.1.5_33de46f26c75888291546388c72611d1:
     resolution: {integrity: sha512-1XEsszpCDcxNeX21QJ+4mFROdn45ulahJ9oLJEo0IA2HZPkwfjSzG+iSXImqFU5nzo0earvlD09z4C9olf8Sxw==}
     engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
     peerDependencies:
@@ -544,8 +544,8 @@ packages:
       react-dom: '>=16.8.0'
     dependencies:
       nanostores: 0.5.12
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
+      react: 18.0.0
+      react-dom: 18.0.0_react@18.0.0
     dev: false
 
   /@nodelib/fs.scandir/2.1.5:
@@ -2335,11 +2335,6 @@ packages:
     resolution: {integrity: sha1-0LFF62kRicY6eNIB3E/bEpPvDAM=}
     dev: true
 
-  /object-assign/4.1.1:
-    resolution: {integrity: sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=}
-    engines: {node: '>=0.10.0'}
-    dev: false
-
   /object-inspect/1.12.0:
     resolution: {integrity: sha512-Ho2z80bVIvJloH+YzRmpZVQe87+qASmBUKZDWgx9cu+KDrX2ZDH/3tMy+gXbZETVGs2M8YdxObOh7XAtim9Y0g==}
     dev: true
@@ -2601,15 +2596,14 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /react-dom/17.0.2_react@17.0.2:
-    resolution: {integrity: sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==}
+  /react-dom/18.0.0_react@18.0.0:
+    resolution: {integrity: sha512-XqX7uzmFo0pUceWFCt7Gff6IyIMzFUn7QMZrbrQfGxtaxXZIcGQzoNpRLE3fQLnS4XzLLPMZX2T9TRcSrasicw==}
     peerDependencies:
-      react: 17.0.2
+      react: ^18.0.0
     dependencies:
       loose-envify: 1.4.0
-      object-assign: 4.1.1
-      react: 17.0.2
-      scheduler: 0.20.2
+      react: 18.0.0
+      scheduler: 0.21.0
     dev: false
 
   /react-refresh/0.11.0:
@@ -2617,12 +2611,11 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /react/17.0.2:
-    resolution: {integrity: sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==}
+  /react/18.0.0:
+    resolution: {integrity: sha512-x+VL6wbT4JRVPm7EGxXhZ8w8LTROaxPXOqhlGyVSrv0sB1jkyFGgXxJ8LVoPRLvPR6/CIZGFmfzqUa2NYeMr2A==}
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: 1.4.0
-      object-assign: 4.1.1
     dev: false
 
   /read-pkg-up/7.0.1:
@@ -2718,11 +2711,10 @@ packages:
     resolution: {integrity: sha512-ZRwKbh/eQ6w9vmTjkuG0Ioi3HBwPFce0O+v//ve+aOq1oeCy7jMV2qzzAlpsNuqpqCBjjriM1lbtZbF/Q8jVyA==}
     dev: true
 
-  /scheduler/0.20.2:
-    resolution: {integrity: sha512-2eWfGgAqqWFGqtdMmcL5zCMK1U8KlXv8SQFGglL3CEtd0aDVDWgeF/YoCmvln55m5zSk3J/20hTaSBeSObsQDQ==}
+  /scheduler/0.21.0:
+    resolution: {integrity: sha512-1r87x5fz9MXqswA2ERLo0EbOAU74DpIUO090gIasYTqlVoJeMcl+Z1Rg7WHz+qtPujhS/hGIt9kxZOYBV3faRQ==}
     dependencies:
       loose-envify: 1.4.0
-      object-assign: 4.1.1
     dev: false
 
   /semver/5.7.1:
@@ -3228,12 +3220,12 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /wouter/2.8.0-alpha.2_react@17.0.2:
+  /wouter/2.8.0-alpha.2_react@18.0.0:
     resolution: {integrity: sha512-aPsL5m5rW9RiceClOmGj6t5gn9Ut2TJVr98UDi1u9MIRNYiYVflg6vFIjdDYJ4IAyH0JdnkSgGwfo0LQS3k2zg==}
     peerDependencies:
       react: '>=16.8.0'
     dependencies:
-      react: 17.0.2
+      react: 18.0.0
     dev: false
 
   /wrappy/1.0.2:

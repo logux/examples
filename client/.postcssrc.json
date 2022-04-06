@@ -1,0 +1,6 @@
+{
+  "plugins": {
+    "postcss-normalize": {},
+    "postcss-nested": {}
+  }
+}

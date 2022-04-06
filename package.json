@@ -1,7 +1,6 @@
 {
   "name": "logux-to-do-example",
   "private": true,
-  "version": "0.0.0",
   "scripts": {
     "lint:ts": "eslint ./ --config .eslintrc --fix"
   },

@@ -31,7 +31,6 @@ export const AuthForm = (): JSX.Element => {
         <TextInput
           id="login"
           label="login"
-          placeholder="Enter your login"
           theme="default"
           value={login}
           onChange={handleLoginChange}
@@ -42,7 +41,6 @@ export const AuthForm = (): JSX.Element => {
         <TextInput
           id="password"
           label="password"
-          placeholder="Enter your password"
           theme="default"
           value={password}
           onChange={handlePasswordChange}

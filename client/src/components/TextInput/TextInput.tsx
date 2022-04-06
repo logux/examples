@@ -13,7 +13,7 @@ type Props = {
   className?: string
   id: string
   label: string
-  placeholder: string
+  placeholder?: string
   theme: 'default' | 'flat'
   value: string
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void

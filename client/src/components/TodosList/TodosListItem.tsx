@@ -107,7 +107,6 @@ export const TodosListItem = ({ id, completed, text }: Props): JSX.Element => {
       <TextInput
         id="create-new-task"
         label="Create new task"
-        placeholder="What needs to be done?"
         theme="default"
         className={styles.textInput}
         value={text}

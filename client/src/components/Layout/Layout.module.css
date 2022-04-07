@@ -8,7 +8,7 @@
   margin: 8px 0;
   font-size: 100px;
   font-weight: 100;
-  color: rgb(175 47 47 / 0.15);
+  color: var(--accent-200);
   text-align: center;
 }
 

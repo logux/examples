@@ -1,7 +1,7 @@
 .todos-list {
   position: relative;
   background: var(--white);
-  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 0.2), 0 25px 50px 0 rgb(0 0 0 / 0.1);
+  box-shadow: 0 2px 4px 0 var(--gray), 0 25px 50px 0 var(--light-gray);
 }
 
 .toggle-action {

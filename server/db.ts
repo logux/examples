@@ -22,10 +22,6 @@ let tasks: TaskRecord[] = [
 ]
 let userTasks: Record<string, string[]> = { '1': ['1'], '2': [] }
 
-export function getAllTasks(): Promise<TaskRecord[]> {
-  return Promise.resolve(tasks)
-}
-
 export function findUser(name: string): User | undefined {
   return users.find(it => it.name === name)
 }

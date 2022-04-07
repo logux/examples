@@ -23,11 +23,11 @@ const [createTaskActionType] = defineSyncMapActions(modelName)
 export default (server: BaseServer): void => {
   addSyncMap<Task>(server, modelName, {
     async access(ctx, id, action) {
-      if (createTaskActionType.type === action.type && 'fields' in action) {
+      if (createTaskActionType.match(action)) {
         return ctx.userId === action.fields.authorId
       } else {
         const task = await findTask(id)
-        return ctx.userId === task?.authorId
+        return !!task && ctx.userId === task.authorId
       }
     },
 
@@ -40,6 +40,7 @@ export default (server: BaseServer): void => {
         id,
         text: ChangedAt(task.text, task.textChangeTime),
         completed: ChangedAt(task.completed, task.completedChangeTime),
+        // Since authorId is not changing while todo's lifecycle, no need to use change time here
         authorId: NoConflictResolution(task.authorId)
       }
     },
@@ -68,7 +69,7 @@ export default (server: BaseServer): void => {
 
   addSyncMapFilter<Task>(server, modelName, {
     access(ctx, id, action) {
-      return ctx.userId === action.filter?.authorId
+      return !!action.filter?.authorId && ctx.userId === action.filter.authorId
     },
 
     async initial(ctx) {
@@ -78,6 +79,7 @@ export default (server: BaseServer): void => {
         id: task.id,
         text: ChangedAt(task.text, task.textChangeTime),
         completed: ChangedAt(task.completed, task.completedChangeTime),
+        // Since authorId is not changing while todo's lifecycle, no need to use change time here
         authorId: NoConflictResolution(task.authorId)
       }))
     },

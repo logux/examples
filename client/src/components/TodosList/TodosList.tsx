@@ -6,7 +6,7 @@ import { useStore } from '@nanostores/react'
 import { nanoid } from 'nanoid'
 
 import { ControlPanel } from '../ControlPanel/ControlPanel.js'
-import { TextInput } from '../TextInput/TextInput.js'
+import { TextField } from '../TextField/TextField.js'
 import { ToggleAction } from '../ToggleAction/ToggleAction.js'
 import { TodosListItem } from './TodosListItem.js'
 import { authStore } from '../../stores/auth.js'
@@ -68,13 +68,14 @@ export const TodosList = (): JSX.Element => {
   return (
     <div className={styles.todosList}>
       <form onSubmit={handleSubmit}>
-        <TextInput
+        <TextField
           id="create-new-task"
           label="Create new task"
           placeholder="What needs to be done?"
           theme="flat"
           value={newTaskTitle}
           onChange={handleNewTaskInputChange}
+          hiddenLabel
         />
         <button type="submit" className={styles.createAction}>
           Create

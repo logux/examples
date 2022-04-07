@@ -3,7 +3,7 @@ import { useClient } from '@logux/client/react'
 import { changeSyncMapById, deleteSyncMapById } from '@logux/client'
 import { KeyboardEvent, useCallback, useEffect, useState } from 'react'
 
-import { TextInput } from '../TextInput/TextInput.js'
+import { TextField } from '../TextField/TextField.js'
 import { tasksStore } from '../../stores/tasks.js'
 import styles from './TodosList.module.css'
 
@@ -104,9 +104,10 @@ export const TodosListItem = ({ id, completed, text }: Props): JSX.Element => {
           Delete task
         </button>
       </div>
-      <TextInput
-        id="create-new-task"
-        label="Create new task"
+      <TextField
+        id="edit-task"
+        label="Edit task"
+        hiddenLabel
         theme="default"
         className={styles.textInput}
         value={text}

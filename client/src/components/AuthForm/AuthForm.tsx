@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
 
 import { auth } from '../../stores/auth.js'
-import { TextInput } from '../TextInput/TextInput.js'
+import { TextField } from '../TextField/TextField.js'
 import styles from './AuthForm.module.css'
 
 export const AuthForm = (): JSX.Element => {
@@ -27,22 +27,23 @@ export const AuthForm = (): JSX.Element => {
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <div className={styles.field}>
-        <label className={styles.label}>Login:</label>
-        <TextInput
+        <TextField
           id="login"
-          label="login"
+          label="Login:"
           theme="default"
           value={login}
           onChange={handleLoginChange}
+          autoComplete="username"
         />
       </div>
       <div className={styles.field}>
-        <label className={styles.label}>Password:</label>
-        <TextInput
+        <TextField
           id="password"
-          label="password"
+          label="Password:"
           theme="default"
           value={password}
+          type="password"
+          autoComplete="current-password"
           onChange={handlePasswordChange}
         />
       </div>

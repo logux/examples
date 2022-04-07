@@ -1,7 +1,7 @@
 import cn from 'classnames'
 import { useClient, useFilter } from '@logux/client/react'
 import { createSyncMap } from '@logux/client'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useStore } from '@nanostores/react'
 import { nanoid } from 'nanoid'
 
@@ -18,7 +18,6 @@ export const TodosList = (): JSX.Element => {
   const client = useClient()
   const filter = useStore(filterStore)
   const { id: authorId } = useStore(authStore)
-  const [editableItemId, setEditableItemId] = useState('')
   const [newTaskTitle, setNewTaskTitle] = useState('')
 
   const tasks = useFilter(tasksStore, {
@@ -26,20 +25,9 @@ export const TodosList = (): JSX.Element => {
     ...(filter === Filter.all ? {} : { completed: filter === Filter.completed })
   })
 
-  const itemLabelRefs: { [key: string]: HTMLInputElement | null } = {}
-
   const handleNewTaskInputChange = useCallback(event => {
     setNewTaskTitle(event.target.value)
   }, [])
-
-  const handleItemOutsideClick = useCallback(
-    event => {
-      if (event.target === itemLabelRefs[editableItemId]) return
-
-      setEditableItemId('')
-    },
-    [editableItemId]
-  )
 
   const handleSubmit = useCallback(
     event => {
@@ -56,14 +44,6 @@ export const TodosList = (): JSX.Element => {
     },
     [newTaskTitle]
   )
-
-  useEffect(() => {
-    document.addEventListener('click', handleItemOutsideClick)
-
-    return () => {
-      document.removeEventListener('click', handleItemOutsideClick)
-    }
-  }, [editableItemId])
 
   return (
     <div className={styles.todosList}>

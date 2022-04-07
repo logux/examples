@@ -18,9 +18,9 @@ const Routes = (): JSX.Element | null => {
   }
 
   if (!userId) {
-    redirectPage(router, 'login', {})
+    redirectPage(router, 'login')
   } else if (page.route === 'login') {
-    redirectPage(router, 'main', {})
+    redirectPage(router, 'main')
   }
 
   switch (page.route) {

@@ -12,7 +12,7 @@ export const LogoutPage = (): null => {
     if (userId) {
       logout()
     } else {
-      redirectPage(router, 'main', {})
+      redirectPage(router, 'main')
     }
   }, [userId])
 

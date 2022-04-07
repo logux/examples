@@ -26,7 +26,7 @@ export const Layout = ({ children }: Props): JSX.Element => {
           <>
             <p>
               <a
-                href={getPagePath(router, 'logout', {})}
+                href={getPagePath(router, 'logout')}
                 className={styles.footerLink}
               >
                 Logout

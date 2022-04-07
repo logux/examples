@@ -1,7 +1,7 @@
 import cn from 'classnames'
 import { useClient } from '@logux/client/react'
 import { changeSyncMapById, deleteSyncMapById } from '@logux/client'
-import { KeyboardEvent, useCallback, useEffect, useState } from 'react'
+import { KeyboardEvent, useCallback, useRef, useState } from 'react'
 
 import { TextField } from '../TextField/TextField.js'
 import { tasksStore } from '../../stores/tasks.js'
@@ -17,24 +17,23 @@ export const TodosListItem = ({ id, completed, text }: Props): JSX.Element => {
   const client = useClient()
   const [editableItemId, setEditableItemId] = useState('')
   const [editableInitialValue, setEditableInitialValue] = useState('')
-  const itemLabelRefs: { [key: string]: HTMLInputElement | null } = {}
+  const inputElement = useRef(null)
 
   const handleItemClick = useCallback(event => {
     event.preventDefault()
   }, [])
 
-  const handleItemDoubleClick = useCallback(
-    (event, todoId, todoText) => {
-      setEditableItemId(todoId)
-      setEditableInitialValue(todoText)
-    },
-    [itemLabelRefs, editableItemId]
-  )
+  const handleItemDoubleClick = useCallback(() => {
+    setEditableItemId(id)
+    setEditableInitialValue(text)
+
+    document.addEventListener('click', handleItemOutsideClick)
+  }, [id, text, editableItemId])
 
   const handleKeyDown = useCallback(
-    (event: KeyboardEvent<HTMLInputElement>, todoId: string) => {
+    (event: KeyboardEvent<HTMLInputElement>) => {
       if (event.key === 'Escape') {
-        changeSyncMapById(client, tasksStore, todoId, {
+        changeSyncMapById(client, tasksStore, id, {
           text: editableInitialValue
         })
 
@@ -43,25 +42,37 @@ export const TodosListItem = ({ id, completed, text }: Props): JSX.Element => {
         setEditableItemId('')
       }
     },
-    [editableItemId, client]
+    [id, editableItemId, editableInitialValue, client]
   )
 
   const handleItemOutsideClick = useCallback(
     event => {
-      if (event.target === itemLabelRefs[editableItemId]) return
+      if (event.target === inputElement.current) return
 
       setEditableItemId('')
+      document.removeEventListener('click', handleItemOutsideClick)
     },
-    [editableItemId]
+    [inputElement]
   )
 
-  useEffect(() => {
-    document.addEventListener('click', handleItemOutsideClick)
+  const handleDeleteClick = useCallback(() => {
+    deleteSyncMapById(client, tasksStore, id)
+  }, [client, tasksStore, id])
 
-    return () => {
-      document.removeEventListener('click', handleItemOutsideClick)
-    }
-  }, [editableItemId])
+  const handleCompletionChange = useCallback(event => {
+    changeSyncMapById(client, tasksStore, id, {
+      completed: Boolean(event.target.checked)
+    })
+  }, [])
+
+  const handleTextChange = useCallback(
+    event => {
+      changeSyncMapById(client, tasksStore, id, {
+        text: event.target.value
+      })
+    },
+    [client, tasksStore, id]
+  )
 
   return (
     <li
@@ -75,31 +86,21 @@ export const TodosListItem = ({ id, completed, text }: Props): JSX.Element => {
           className={styles.checkbox}
           type="checkbox"
           id={`todo-${id}`}
-          onChange={event => {
-            changeSyncMapById(client, tasksStore, id, {
-              completed: Boolean(event.target.checked)
-            })
-          }}
+          onChange={handleCompletionChange}
           checked={completed}
         />
         <label
           className={styles.label}
           htmlFor={`todo-${id}`}
-          onClick={event => {
-            handleItemClick(event)
-          }}
-          onDoubleClick={event => {
-            handleItemDoubleClick(event, id, text)
-          }}
+          onClick={handleItemClick}
+          onDoubleClick={handleItemDoubleClick}
         >
           {text}
         </label>
         <button
           className={styles.deleteControl}
           type="button"
-          onClick={() => {
-            deleteSyncMapById(client, tasksStore, id)
-          }}
+          onClick={handleDeleteClick}
         >
           Delete task
         </button>
@@ -111,17 +112,9 @@ export const TodosListItem = ({ id, completed, text }: Props): JSX.Element => {
         theme="default"
         className={styles.textInput}
         value={text}
-        ref={ref => {
-          itemLabelRefs[id] = ref
-        }}
-        onKeyDown={event => {
-          handleKeyDown(event, id)
-        }}
-        onChange={event => {
-          changeSyncMapById(client, tasksStore, id, {
-            text: event.target.value
-          })
-        }}
+        ref={inputElement}
+        onKeyDown={handleKeyDown}
+        onChange={handleTextChange}
       />
     </li>
   )

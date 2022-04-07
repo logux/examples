@@ -4,6 +4,7 @@
   "scripts": {
     "lint:ts": "eslint ./ --config .eslintrc --fix"
   },
+  "type": "module",
   "devDependencies": {
     "@logux/eslint-config": "^46.1.2",
     "@typescript-eslint/eslint-plugin": "^5.16.0",

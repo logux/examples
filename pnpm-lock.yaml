@@ -66,12 +66,12 @@ importers:
       react: 18.0.0
       react-dom: 18.0.0_react@18.0.0
       stylelint: 14.6.1
-      typescript: 4.6.3
       vite: 2.9.1
     devDependencies:
       '@logux/stylelint-config': 0.9.0_stylelint@14.6.1
       '@types/react': 17.0.43
       '@types/react-dom': 17.0.14
+      typescript: 4.6.3
 
   server:
     specifiers:
@@ -3142,6 +3142,7 @@ packages:
     resolution: {integrity: sha512-yNIatDa5iaofVozS/uQJEl3JRWLKKGJKh6Yaiv0GLGSuhpFJe7P3SbHZ8/yjAHRQwKRoA6YZqlfjXWmVzoVSMw==}
     engines: {node: '>=4.2.0'}
     hasBin: true
+    dev: true
 
   /unbox-primitive/1.0.1:
     resolution: {integrity: sha512-tZU/3NqK3dA5gpE1KtyiJUrEB0lxnGkMFHptJ7q6ewdZ8s12QrODwNbhIJStmJkd1QDXa1NRA8aF2A1zk/Ypyw==}

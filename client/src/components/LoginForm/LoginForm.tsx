@@ -2,9 +2,9 @@ import { useCallback, useState } from 'react'
 
 import { auth } from '../../stores/auth.js'
 import { TextField } from '../TextField/TextField.js'
-import styles from './AuthForm.module.css'
+import styles from './LoginForm.module.css'
 
-export const AuthForm = (): JSX.Element => {
+export const LoginForm = (): JSX.Element => {
   const [login, setLogin] = useState('admin')
   const [password, setPassword] = useState('admin')
 

@@ -1,8 +1,9 @@
 import { ReactNode } from 'react'
-import { Link } from 'wouter'
+import { getPagePath } from '@nanostores/router'
 import { useStore } from '@nanostores/react'
 
 import { authStore } from '../../stores/auth.js'
+import { router } from '../../stores/router.js'
 import styles from './Layout.module.css'
 
 type Props = {
@@ -24,9 +25,12 @@ export const Layout = ({ children }: Props): JSX.Element => {
         {userId && (
           <>
             <p>
-              <Link className={styles.footerLink} to="/logout">
+              <a
+                href={getPagePath(router, 'logout', {})}
+                className={styles.footerLink}
+              >
                 Logout
-              </Link>
+              </a>
             </p>
             <p>Double-click to edit a todo</p>
           </>

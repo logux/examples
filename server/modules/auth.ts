@@ -54,6 +54,7 @@ export default function applyAuth(server: BaseServer): void {
       }
 
       if (req.method === 'DELETE') {
+        // TODO move to cookie parsing library in separated PR
         const maybeSessionId = req.headers.cookie
           ?.split(';')
           ?.map(it => it.trim())

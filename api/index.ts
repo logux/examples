@@ -11,9 +11,3 @@ export type Task = {
   completed: boolean
   authorId?: string
 }
-
-export type TaskRecord = {
-  id: string
-  textChangeTime: number
-  completedChangeTime: number
-} & Task

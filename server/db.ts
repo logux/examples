@@ -1,4 +1,10 @@
-import { TaskRecord, User } from '../api/index.js'
+import { Task, User } from '../api/index.js'
+
+export type TaskRecord = {
+  id: string
+  textChangeTime: number
+  completedChangeTime: number
+} & Task
 
 let users = [
   { id: '1', name: 'admin', password: 'admin' },

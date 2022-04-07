@@ -12,13 +12,7 @@
     outline: 2px solid rgb(175 47 47 / 0.15);
   }
 
-  &::-webkit-input-placeholder {
-    font-style: italic;
-    font-weight: 300;
-    color: var(--light-gray);
-  }
-
-  &::-moz-placeholder {
+  &::placeholder {
     font-style: italic;
     font-weight: 300;
     color: var(--light-gray);

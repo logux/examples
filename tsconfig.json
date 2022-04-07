@@ -17,5 +17,4 @@
     "jsx": "react-jsx"
   },
   "include": ["./"],
-  "references": [{ "path": "./tsconfig.node.json" }]
 }

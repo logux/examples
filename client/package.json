@@ -1,0 +1,38 @@
+{
+  "name": "logux-to-do-example-client",
+  "private": true,
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint:css": "stylelint '**/*.css' --fix"
+  },
+  "dependencies": {
+    "@logux/client": "^0.15.2",
+    "@logux/core": "^0.7.3",
+    "@nanostores/react": "^0.1.5",
+    "@nanostores/router": "^0.3.1",
+    "@vitejs/plugin-react": "^1.0.7",
+    "autoprefixer": "^10.4.4",
+    "browserslist": "^4.20.2",
+    "classnames": "^2.3.1",
+    "nanoid": "^3.3.2",
+    "nanostores": "^0.5.12",
+    "postcss": "^8.4.12",
+    "postcss-nested": "^5.0.5",
+    "postcss-normalize": "^10.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "stylelint": "^14.6.1",
+    "vite": "^2.8.0"
+  },
+  "devDependencies": {
+    "@logux/stylelint-config": "^0.9.0",
+    "@types/react": "^17.0.33",
+    "@types/react-dom": "^17.0.10",
+    "typescript": "^4.6.3"
+  }
+}

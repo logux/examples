@@ -1,0 +1,13 @@
+:root {
+  --black: rgb(77 77 77);
+  --white: rgb(255 255 255);
+  --dark-gray: rgb(119 119 119);
+  --dark-gray-100: rgb(153 153 153);
+  --gray: rgb(191 191 191);
+  --light-gray: rgb(230 230 230);
+  --light-gray-100: rgb(246 246 246);
+  --accent: rgb(175 91 94);
+  --accent-100: rgb(204 154 154);
+  --accent-200: rgb(175 47 47 / 0.2);
+  --accent-300: rgb(175 47 47 / 0.1);
+}

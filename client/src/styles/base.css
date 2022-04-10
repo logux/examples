@@ -1,0 +1,8 @@
+@import-normalize "normalize/opinionated.css";
+
+body {
+  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  color: var(--black);
+  background: var(--light-gray-100);
+}

@@ -1,0 +1,42 @@
+.input {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  font-family: inherit;
+  font-size: 24px;
+  font-weight: inherit;
+  line-height: 34px;
+
+  &:hover,
+  &:focus {
+    outline: 2px solid var(--accent-200);
+  }
+
+  &::placeholder {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--gray);
+  }
+}
+
+.label {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.field {
+  &_theme_default {
+    & .input {
+      padding: 14px 16px;
+      border: 1px solid var(--dark-gray-100);
+    }
+  }
+
+  &_theme_flat {
+    & .input {
+      padding: 15px 15px 15px 60px;
+      border: none;
+      box-shadow: inset 0 -2px 1px var(--light-gray-100);
+    }
+  }
+}

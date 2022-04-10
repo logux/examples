@@ -1,0 +1,6 @@
+{
+  "extends": "@logux/eslint-config/ts",
+  "rules": {
+    "prefer-let/prefer-let": "off"
+  }
+}

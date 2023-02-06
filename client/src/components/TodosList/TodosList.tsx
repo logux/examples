@@ -1,7 +1,7 @@
 import cn from 'classnames'
 import { useClient, useFilter } from '@logux/client/react'
 import { createSyncMap } from '@logux/client'
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import { useStore } from '@nanostores/react'
 import { nanoid } from 'nanoid'
 
@@ -25,36 +25,31 @@ export const TodosList = (): JSX.Element => {
     ...(filter === Filter.all ? {} : { completed: filter === Filter.completed })
   })
 
-  const handleNewTaskInputChange = useCallback(event => {
-    setNewTaskTitle(event.target.value)
-  }, [])
-
-  const handleSubmit = useCallback(
-    event => {
-      event.preventDefault()
-
-      createSyncMap(client, tasksStore, {
-        id: nanoid(),
-        text: newTaskTitle,
-        completed: false,
-        authorId
-      })
-
-      setNewTaskTitle('')
-    },
-    [newTaskTitle]
-  )
-
   return (
     <div className={styles.todosList}>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={event => {
+          event.preventDefault()
+
+          createSyncMap(client, tasksStore, {
+            id: nanoid(),
+            text: newTaskTitle,
+            completed: false,
+            authorId
+          })
+
+          setNewTaskTitle('')
+        }}
+      >
         <TextField
           id="create-new-task"
           label="Create new task"
           placeholder="What needs to be done?"
           theme="flat"
           value={newTaskTitle}
-          onChange={handleNewTaskInputChange}
+          onChange={event => {
+            setNewTaskTitle(event.target.value)
+          }}
           hiddenLabel
         />
         <button type="submit" className={styles.createAction}>

@@ -1,13 +1,7 @@
 import { createRouter } from '@nanostores/router'
 
-interface Routes {
-  main: void
-  login: void
-  logout: void
-}
-
-export const router = createRouter<Routes>({
+export const router = createRouter({
   main: '/',
   login: '/login',
   logout: '/logout'
-})
+} as const)

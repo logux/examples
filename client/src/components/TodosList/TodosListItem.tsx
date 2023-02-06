@@ -1,7 +1,7 @@
 import cn from 'classnames'
 import { useClient } from '@logux/client/react'
 import { changeSyncMapById, deleteSyncMapById } from '@logux/client'
-import { KeyboardEvent, useCallback, useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 
 import { TextField } from '../TextField/TextField.js'
 import { tasksStore } from '../../stores/tasks.js'
@@ -19,59 +19,14 @@ export const TodosListItem = ({ id, completed, text }: Props): JSX.Element => {
   const [editableInitialValue, setEditableInitialValue] = useState('')
   const inputElement = useRef(null)
 
-  const handleItemClick = useCallback(event => {
-    event.preventDefault()
-  }, [])
-
-  const handleItemDoubleClick = useCallback(() => {
-    setEditableItemId(id)
-    setEditableInitialValue(text)
-
-    document.addEventListener('click', handleItemOutsideClick)
-  }, [id, text, editableItemId])
-
-  const handleKeyDown = useCallback(
-    (event: KeyboardEvent<HTMLInputElement>) => {
-      if (event.key === 'Escape') {
-        changeSyncMapById(client, tasksStore, id, {
-          text: editableInitialValue
-        })
-
-        setEditableItemId('')
-      } else if (event.key === 'Enter') {
-        setEditableItemId('')
-      }
-    },
-    [id, editableItemId, editableInitialValue, client]
-  )
-
   const handleItemOutsideClick = useCallback(
-    event => {
+    (event: MouseEvent) => {
       if (event.target === inputElement.current) return
 
       setEditableItemId('')
       document.removeEventListener('click', handleItemOutsideClick)
     },
     [inputElement]
-  )
-
-  const handleDeleteClick = useCallback(() => {
-    deleteSyncMapById(client, tasksStore, id)
-  }, [client, tasksStore, id])
-
-  const handleCompletionChange = useCallback(event => {
-    changeSyncMapById(client, tasksStore, id, {
-      completed: Boolean(event.target.checked)
-    })
-  }, [])
-
-  const handleTextChange = useCallback(
-    event => {
-      changeSyncMapById(client, tasksStore, id, {
-        text: event.target.value
-      })
-    },
-    [client, tasksStore, id]
   )
 
   return (
@@ -86,21 +41,34 @@ export const TodosListItem = ({ id, completed, text }: Props): JSX.Element => {
           className={styles.checkbox}
           type="checkbox"
           id={`todo-${id}`}
-          onChange={handleCompletionChange}
+          onChange={event => {
+            changeSyncMapById(client, tasksStore, id, {
+              completed: Boolean(event.target.checked)
+            })
+          }}
           checked={completed}
         />
         <label
           className={styles.label}
           htmlFor={`todo-${id}`}
-          onClick={handleItemClick}
-          onDoubleClick={handleItemDoubleClick}
+          onClick={event => {
+            event.preventDefault()
+          }}
+          onDoubleClick={() => {
+            setEditableItemId(id)
+            setEditableInitialValue(text)
+
+            document.addEventListener('click', handleItemOutsideClick)
+          }}
         >
           {text}
         </label>
         <button
           className={styles.deleteControl}
           type="button"
-          onClick={handleDeleteClick}
+          onClick={() => {
+            deleteSyncMapById(client, tasksStore, id)
+          }}
         >
           Delete task
         </button>
@@ -113,8 +81,22 @@ export const TodosListItem = ({ id, completed, text }: Props): JSX.Element => {
         className={styles.textInput}
         value={text}
         ref={inputElement}
-        onKeyDown={handleKeyDown}
-        onChange={handleTextChange}
+        onKeyDown={event => {
+          if (event.key === 'Escape') {
+            changeSyncMapById(client, tasksStore, id, {
+              text: editableInitialValue
+            })
+
+            setEditableItemId('')
+          } else if (event.key === 'Enter') {
+            setEditableItemId('')
+          }
+        }}
+        onChange={event => {
+          changeSyncMapById(client, tasksStore, id, {
+            text: event.target.value
+          })
+        }}
       />
     </li>
   )

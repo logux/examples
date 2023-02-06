@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 
 import { auth } from '../../stores/auth.js'
 import { TextField } from '../TextField/TextField.js'
@@ -8,31 +8,26 @@ export const LoginForm = (): JSX.Element => {
   const [login, setLogin] = useState('admin')
   const [password, setPassword] = useState('admin')
 
-  const handleLoginChange = useCallback(event => {
-    setLogin(event.target.value)
-  }, [])
-
-  const handlePasswordChange = useCallback(event => {
-    setPassword(event.target.value)
-  }, [])
-
-  const handleSubmit = useCallback(event => {
-    event.preventDefault()
-    auth({
-      name: event.currentTarget.login.value,
-      password: event.currentTarget.password.value
-    })
-  }, [])
-
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
+    <form
+      onSubmit={event => {
+        event.preventDefault()
+        auth({
+          name: event.currentTarget.login.value,
+          password: event.currentTarget.password.value
+        })
+      }}
+      className={styles.form}
+    >
       <div className={styles.field}>
         <TextField
           id="login"
           label="Login:"
           theme="default"
           value={login}
-          onChange={handleLoginChange}
+          onChange={event => {
+            setLogin(event.target.value)
+          }}
           autoComplete="username"
         />
       </div>
@@ -44,7 +39,9 @@ export const LoginForm = (): JSX.Element => {
           value={password}
           type="password"
           autoComplete="current-password"
-          onChange={handlePasswordChange}
+          onChange={event => {
+            setPassword(event.target.value)
+          }}
         />
       </div>
       <div className={styles.action}>

@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "start": "pnpm -r start",
-    "lint:ts": "eslint ./ --config .eslintrc --fix"
+    "test": "pnpm -r --include-workspace-root lint",
+    "lint": "tsc --noEmit && eslint ."
   },
   "type": "module",
   "devDependencies": {

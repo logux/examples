@@ -8,7 +8,7 @@
     "start": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint:css": "stylelint '**/*.css' --fix"
+    "lint": "stylelint **/*.css"
   },
   "dependencies": {
     "@logux/client": "^0.18.4",

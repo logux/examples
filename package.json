@@ -2,6 +2,7 @@
   "name": "logux-to-do-example",
   "private": true,
   "scripts": {
+    "start": "pnpm -r start",
     "lint:ts": "eslint ./ --config .eslintrc --fix"
   },
   "type": "module",

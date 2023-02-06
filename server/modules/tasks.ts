@@ -85,8 +85,14 @@ export default (server: BaseServer): void => {
     },
 
     actions(filterCtx) {
-      return actionCtx => {
-        return actionCtx.userId === filterCtx.userId
+      return (actionCtx, action) => {
+        if ('fields' in action) {
+          return action.fields.authorId === filterCtx.userId
+        } else {
+          return findTask(action.id).then(task => {
+            return filterCtx.userId === task?.authorId
+          })
+        }
       }
     }
   })
